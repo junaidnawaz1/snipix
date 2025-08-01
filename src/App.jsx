@@ -12,9 +12,8 @@ import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import SingleQRCode from "./pages/SingleQRCode";
 import Feedback from "./pages/Feedback";
 import AboutUs from "./pages/AboutUs";
-import HireMe from "./pages/HireME";
 import { AuthProvider } from "./components/AuthContext";
-
+import HireMe from "./pages/HireMe"
 import toast, { Toaster } from "react-hot-toast";
 import AuthProtectedRoute from "./components/AuthProtectedRoute";
 toast
@@ -82,7 +81,7 @@ function App() {
   path="/hire-me"
   element={
     <AuthProtectedRoute>
-      <HireMe />
+      <HireMe/>
     </AuthProtectedRoute>
   }
 />
