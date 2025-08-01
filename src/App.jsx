@@ -6,16 +6,13 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import AdminLinks from "./pages/AdminLinks";
 import AdminUsers from "./pages/AdminUser";
-import TestPlan from "./pages/testPlan";
 import MyQRCodes from "./pages/MyQRCodes";
 import CustomFeatures from "./pages/CustomFeatures";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import SingleQRCode from "./pages/SingleQRCode";
 import Feedback from "./pages/Feedback";
-import Footer from "./components/Footer";
 import AboutUs from "./pages/AboutUs";
 import HireMe from "./pages/HireME";
-import ContactUs from "./pages/ContactUs";
 import { AuthProvider } from "./components/AuthContext";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -52,7 +49,7 @@ function App() {
     </AdminProtectedRoute>
   }
 />
-        <Route path="/test-plan" element={<TestPlan />} />
+        
 <Route path="/myqrcodes"  element={
     <AuthProtectedRoute>
       <MyQRCodes />
