@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/:shortUrl", "destination": "https://snipix-backend-efn2.onrender.com/:shortUrl" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
