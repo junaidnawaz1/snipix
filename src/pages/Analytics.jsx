@@ -16,6 +16,7 @@ const Analytics = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [linkToDelete, setLinkToDelete] = useState(null);
   const navigate = useNavigate();
+const FRONTEND_URL = "https://snipix-app.vercel.app"; // move to top of file
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -219,14 +220,14 @@ const Analytics = () => {
                     
                     <div>
                       <p className="text-sm font-medium text-purple-600 mb-1">Short URL</p>
-                      <a 
-                        href={`${import.meta.env.VITE_BACKEND_URL}/${link.shortUrl}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-purple-600 hover:text-purple-800 underline break-all text-sm"
-                      >
-                        {`${import.meta.env.VITE_BACKEND_URL}/${link.shortUrl}`}
-                      </a>
+                    <a 
+  href={`${FRONTEND_URL}/${link.shortUrl}`} 
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-purple-600 hover:text-purple-800 underline break-all text-sm"
+>
+  {`${FRONTEND_URL}/${link.shortUrl}`}
+</a>
                     </div>
                     
                     <div>
