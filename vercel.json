@@ -5,9 +5,10 @@
       "destination": "https://snipix-backend-efn2.onrender.com/:shortUrl"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?![a-zA-Z0-9_-]{4,12}$).*)",
       "destination": "/index.html"
     }
   ]
 }
+
 
