@@ -12,6 +12,14 @@
       "source": "/analytics",
       "destination": "/index.html"
     },
+    {
+      "source": "/admin/users",
+      "destination": "/index.html"
+    },
+     {
+      "source": "/admin/links",
+      "destination": "/index.html"
+    },
       {
       "source": "/singleqrcode",
       "destination": "/index.html"
