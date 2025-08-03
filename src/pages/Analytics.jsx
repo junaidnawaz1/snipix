@@ -16,7 +16,7 @@ const Analytics = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [linkToDelete, setLinkToDelete] = useState(null);
   const navigate = useNavigate();
-const FRONTEND_URL = "https://snipix-app.vercel.app"; // move to top of file
+  const FRONTEND_URL = "https://snipix-app.vercel.app"; // move to top of file
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -195,7 +195,18 @@ const FRONTEND_URL = "https://snipix-app.vercel.app"; // move to top of file
             
             {links.length === 0 ? (
               <div className="bg-white p-8 rounded-xl shadow text-center">
-                <p className="text-purple-600">You haven't created any shortened links yet.</p>
+                <p className="text-purple-600 mb-4 text-lg">
+                  You haven't created any shortened links yet.
+                </p>
+                <p className="text-gray-500 mb-6">
+                  Create your first short link to start tracking analytics!
+                </p>
+                <button
+                  onClick={() => navigate("/custom-features")}
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition-all transform hover:scale-[1.02]"
+                >
+                  Create Your First Short Link
+                </button>
               </div>
             ) : (
               links.map((link) => (
@@ -203,31 +214,24 @@ const FRONTEND_URL = "https://snipix-app.vercel.app"; // move to top of file
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                     <div>
                       <p className="text-sm font-medium text-purple-600 mb-1">Original URL</p>
-                      {/* <a 
-                        href={link.originalUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 underline break-all text-sm"
-                      >
-                        {link.originalUrl}
-                      </a> */}
-<p className='break-all text-sm font-semibold'>
-  {link.originalUrl.length > 50 
-    ? `${link.originalUrl.slice(0, 40)}` 
-    : link.originalUrl}
-    .......
-</p>                    </div>
+                      <p className='break-all text-sm font-semibold'>
+                        {link.originalUrl.length > 50 
+                          ? `${link.originalUrl.slice(0, 40)}` 
+                          : link.originalUrl}
+                          .......
+                      </p>
+                    </div>
                     
                     <div>
                       <p className="text-sm font-medium text-purple-600 mb-1">Short URL</p>
-                    <a 
-  href={`${FRONTEND_URL}/${link.shortUrl}`} 
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="text-purple-600 hover:text-purple-800 underline break-all text-sm"
->
-  {`${FRONTEND_URL}/${link.shortUrl}`}
-</a>
+                      <a 
+                        href={`${FRONTEND_URL}/${link.shortUrl}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-purple-600 hover:text-purple-800 underline break-all text-sm"
+                      >
+                        {`${FRONTEND_URL}/${link.shortUrl}`}
+                      </a>
                     </div>
                     
                     <div>
