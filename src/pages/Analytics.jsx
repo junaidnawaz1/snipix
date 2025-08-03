@@ -16,7 +16,7 @@ const Analytics = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [linkToDelete, setLinkToDelete] = useState(null);
   const navigate = useNavigate();
-  const FRONTEND_URL = "https://snipix-app.vercel.app"; // move to top of file
+  const FRONTEND_URL = "https://snipix-app.vercel.app";
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -118,153 +118,153 @@ const Analytics = () => {
             <p className="text-lg text-purple-600">Track and analyze your shortened links</p>
           </div>
 
-          {/* Charts Section */}
-          <div className="space-y-6">
-            {/* Top Row - Bar and Line Charts */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Bar Chart */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
-                <div className="flex items-center mb-4">
-                  <FaChartBar className="text-purple-600 mr-2" />
-                  <h3 className="text-xl font-semibold text-purple-800">Top Links by Clicks</h3>
-                </div>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={topLinks}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="clicks" fill="#8884d8" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-
-              {/* Line Chart */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
-                <div className="flex items-center mb-4">
-                  <FaChartLine className="text-purple-600 mr-2" />
-                  <h3 className="text-xl font-semibold text-purple-800">Clicks Over Time</h3>
-                </div>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={lineChartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                    <YAxis />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="clicks" stroke="#82ca9d" strokeWidth={2} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
+          {/* If no links, show only friendly message */}
+          {links.length === 0 ? (
+            <div className="bg-white p-8 rounded-xl shadow text-center">
+              <p className="text-purple-600 mb-4">
+                You haven't created any shortened links yet.
+              </p>
+              <button
+                onClick={() => navigate('/custom-features')}
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition-all transform hover:scale-[1.02]"
+              >
+                Create Your First Short Link
+              </button>
             </div>
-
-            {/* Pie Chart - Bottom Row */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
-              <div className="flex items-center mb-4">
-                <FaChartPie className="text-purple-600 mr-2" />
-                <h3 className="text-xl font-semibold text-purple-800">Top 5 Links Distribution</h3>
-              </div>
-              <ResponsiveContainer width="100%" height={400}>
-                <PieChart>
-                  <Pie
-                    data={topLinks}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={120}
-                    fill="#8884d8"
-                    dataKey="clicks"
-                    nameKey="name"
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {topLinks.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* Links List Section */}
-          <div className="space-y-6 mt-12">
-            <h2 className="text-2xl font-bold text-purple-800 mb-6 flex items-center">
-              <FaLink className="mr-3" /> Your Shortened Links
-            </h2>
-            
-            {links.length === 0 ? (
-              <div className="bg-white p-8 rounded-xl shadow text-center">
-                <p className="text-purple-600 mb-4 text-lg">
-                  You haven't created any shortened links yet.
-                </p>
-                <p className="text-gray-500 mb-6">
-                  Create your first short link to start tracking analytics!
-                </p>
-                <button
-                  onClick={() => navigate("/custom-features")}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-bold shadow-lg transition-all transform hover:scale-[1.02]"
-                >
-                  Create Your First Short Link
-                </button>
-              </div>
-            ) : (
-              links.map((link) => (
-                <div key={link._id} className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                    <div>
-                      <p className="text-sm font-medium text-purple-600 mb-1">Original URL</p>
-                      <p className='break-all text-sm font-semibold'>
-                        {link.originalUrl.length > 50 
-                          ? `${link.originalUrl.slice(0, 40)}` 
-                          : link.originalUrl}
-                          .......
-                      </p>
+          ) : (
+            <>
+              {/* Charts Section */}
+              <div className="space-y-6">
+                {/* Top Row - Bar and Line Charts */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Bar Chart */}
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
+                    <div className="flex items-center mb-4">
+                      <FaChartBar className="text-purple-600 mr-2" />
+                      <h3 className="text-xl font-semibold text-purple-800">Top Links by Clicks</h3>
                     </div>
-                    
-                    <div>
-                      <p className="text-sm font-medium text-purple-600 mb-1">Short URL</p>
-                      <a 
-                        href={`${FRONTEND_URL}/${link.shortUrl}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-purple-600 hover:text-purple-800 underline break-all text-sm"
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart data={topLinks}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                        <YAxis />
+                        <Tooltip />
+                        <Bar dataKey="clicks" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  {/* Line Chart */}
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
+                    <div className="flex items-center mb-4">
+                      <FaChartLine className="text-purple-600 mr-2" />
+                      <h3 className="text-xl font-semibold text-purple-800">Clicks Over Time</h3>
+                    </div>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <LineChart data={lineChartData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                        <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+                        <YAxis />
+                        <Tooltip />
+                        <Line type="monotone" dataKey="clicks" stroke="#82ca9d" strokeWidth={2} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                {/* Pie Chart - Bottom Row */}
+                <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
+                  <div className="flex items-center mb-4">
+                    <FaChartPie className="text-purple-600 mr-2" />
+                    <h3 className="text-xl font-semibold text-purple-800">Top 5 Links Distribution</h3>
+                  </div>
+                  <ResponsiveContainer width="100%" height={400}>
+                    <PieChart>
+                      <Pie
+                        data={topLinks}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        outerRadius={120}
+                        fill="#8884d8"
+                        dataKey="clicks"
+                        nameKey="name"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                       >
-                        {`${FRONTEND_URL}/${link.shortUrl}`}
-                      </a>
-                    </div>
-                    
-                    <div>
-                      <p className="text-sm font-medium text-purple-600 mb-1">Created At</p>
-                      <p className="text-gray-800">
-                        {new Date(link.createdAt).toLocaleString()}
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <p className="text-sm font-medium text-purple-600 mb-1">Total Clicks</p>
-                      <p className="text-2xl font-bold text-purple-700">{link.clicks}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-end space-x-3">
-                    <button 
-                      onClick={() => navigate('/singleqrcode', { state: { link } })}
-                      className="flex items-center bg-purple-100 hover:bg-purple-200 text-purple-700 px-4 py-2 rounded-lg transition-colors"
-                    >
-                      <FaQrcode className="mr-2" /> View QR Code
-                    </button>
-                    <button 
-                      onClick={() => handleDeleteClick(link._id)}
-                      className="flex items-center bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg transition-colors"
-                    >
-                      <FaTrash className="mr-2" /> Delete
-                    </button>
-                  </div>
+                        {topLinks.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
                 </div>
-              ))
-            )}
-          </div>
+              </div>
+
+              {/* Links List Section */}
+              <div className="space-y-6 mt-12">
+                <h2 className="text-2xl font-bold text-purple-800 mb-6 flex items-center">
+                  <FaLink className="mr-3" /> Your Shortened Links
+                </h2>
+                
+                {links.map((link) => (
+                  <div key={link._id} className="bg-white p-6 rounded-xl shadow-lg border border-purple-100">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                      <div>
+                        <p className="text-sm font-medium text-purple-600 mb-1">Original URL</p>
+                        <p className='break-all text-sm font-semibold'>
+                          {link.originalUrl.length > 50 
+                            ? `${link.originalUrl.slice(0, 40)}` 
+                            : link.originalUrl}
+                          .......
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm font-medium text-purple-600 mb-1">Short URL</p>
+                        <a 
+                          href={`${FRONTEND_URL}/${link.shortUrl}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-purple-600 hover:text-purple-800 underline break-all text-sm"
+                        >
+                          {`${FRONTEND_URL}/${link.shortUrl}`}
+                        </a>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm font-medium text-purple-600 mb-1">Created At</p>
+                        <p className="text-gray-800">
+                          {new Date(link.createdAt).toLocaleString()}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <p className="text-sm font-medium text-purple-600 mb-1">Total Clicks</p>
+                        <p className="text-2xl font-bold text-purple-700">{link.clicks}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end space-x-3">
+                      <button 
+                        onClick={() => navigate('/singleqrcode', { state: { link } })}
+                        className="flex items-center bg-purple-100 hover:bg-purple-200 text-purple-700 px-4 py-2 rounded-lg transition-colors"
+                      >
+                        <FaQrcode className="mr-2" /> View QR Code
+                      </button>
+                      <button 
+                        onClick={() => handleDeleteClick(link._id)}
+                        className="flex items-center bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg transition-colors"
+                      >
+                        <FaTrash className="mr-2" /> Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
