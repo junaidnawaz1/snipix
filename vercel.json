@@ -12,6 +12,10 @@
       "source": "/analytics",
       "destination": "/index.html"
     },
+      {
+      "source": "/singleqrcode",
+      "destination": "/index.html"
+    },
      {
       "source": "/myqrcodes",
       "destination": "/index.html"
