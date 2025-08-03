@@ -70,9 +70,10 @@ const CustomFeatures = () => {
         <div>
           <label className="block text-purple-700 mb-2">Custom Alias</label>
           <div className="flex">
-            <span className="inline-flex items-center px-3 rounded-l-lg border-2 border-r-0 border-purple-200 bg-purple-100 text-purple-700">
-              localhost:5173/
-            </span>
+            <span className="inline-flex items-center px-3 rounded-l-lg border-2 border-r-0 border-purple-200 bg-purple-100 text-purple-700 text-xs sm:text-sm truncate max-w-[90px]">
+  snipix/
+</span>
+
             <input
               type="text"
               placeholder="my-custom-link"
