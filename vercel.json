@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/:shortUrl((?!analytics|feedback|custom|qr|myqrcodes|plans|services)[a-zA-Z0-9_-]{4,12})",
+      "source": "/:shortUrl(^[a-zA-Z0-9_-]{4,12}$)",
       "destination": "https://snipix-backend-efn2.onrender.com/:shortUrl"
     },
     {
@@ -10,3 +10,4 @@
     }
   ]
 }
+
