@@ -123,6 +123,8 @@ const Navbar = () => {
           <Link to="/hire-me" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Hire Me</Link>
           <Link to="/analytics" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Analytics</Link>
           <Link to="/myqrcodes" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">My QRCodes</Link>
+           <Link to="/custom-features" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">My QRCodes</Link>
+
         </div>
       )}
     </nav>
