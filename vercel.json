@@ -1,12 +1,12 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/([a-zA-Z0-9_-]{4,12})$",
-      "dest": "https://snipix-backend-efn2.onrender.com/$1"
+      "source": "/:shortUrl([a-z0-9]{4,8})",
+      "destination": "https://snipix-backend-efn2.onrender.com/:shortUrl"
     },
     {
-      "src": "^(?!/.*\\..*).*$",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
