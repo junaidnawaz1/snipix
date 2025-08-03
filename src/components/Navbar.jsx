@@ -8,13 +8,13 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({ username: '', email: '' });
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false); // New for page navigation
   const navigate = useNavigate();
   const location = useLocation();
 
   const checkAuth = async () => {
     try {
-      const authRes = await axios.get("/api/auth/check");
+      await axios.get("/api/auth/check");
       setIsLoggedIn(true);
       const userRes = await axios.get("/api/auth/profile");
       setUserData({
@@ -46,26 +46,29 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-r from-purple-400 via-blue-700 to-pink-400 text-white px-4 py-3 sticky top-0 z-50 shadow-lg">
       <div className="flex justify-between items-center">
-        
-        {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2 p-1 rounded">
-          <img
-            src="/logo.png"
-            alt="SnipiX Logo"
-            className="h-16 w-auto object-contain"
-          />
-        </Link>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden text-white text-2xl"
-        >
-          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+        {/* Left Section: Logo + Mobile Nav Toggle */}
+        <div className="flex items-center space-x-3">
+          {/* Mobile Nav Toggle */}
+          <button
+            onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+            className="lg:hidden text-white text-2xl"
+          >
+            {isMobileNavOpen ? <FaTimes /> : <FaBars />}
+          </button>
 
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-4">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2 p-1 rounded">
+            <img
+              src="/logo.png"
+              alt="SnipiX Logo"
+              className="h-16 w-auto object-contain"
+            />
+          </Link>
+        </div>
+
+        {/* Right Section: Auth UI */}
+        <div className="flex items-center space-x-4">
           {isLoggedIn ? (
             <div className="relative">
               <button
@@ -111,33 +114,15 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
-      {isMobileMenuOpen && (
+      {/* Mobile Navigation Menu */}
+      {isMobileNavOpen && (
         <div className="lg:hidden mt-3 space-y-2 bg-purple-700 p-4 rounded-lg">
-          {isLoggedIn ? (
-            <>
-              <p className="font-semibold">{userData.username}</p>
-              <p className="text-sm text-gray-200">{userData.email}</p>
-              <button
-                onClick={handleLogout}
-                className="flex items-center text-white hover:text-gray-300"
-              >
-                <FaSignOutAlt className="mr-2 text-red-300" />
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center text-white hover:text-gray-300">
-                <FaUser className="mr-2" />
-                Login
-              </Link>
-              <Link to="/register" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center text-white hover:text-gray-300">
-                <FaUserPlus className="mr-2" />
-                Register
-              </Link>
-            </>
-          )}
+          <Link to="/" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Home</Link>
+          <Link to="/about-us" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">About Us</Link>
+          <Link to="/feedback" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Feedback</Link>
+          <Link to="/hire-me" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Hire Me</Link>
+          <Link to="/analytics" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Analytics</Link>
+          <Link to="/myqrcodes" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">My QRCodes</Link>
         </div>
       )}
     </nav>
