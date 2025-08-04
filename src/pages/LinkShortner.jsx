@@ -36,7 +36,7 @@ const LinkShortner = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shortUrl);
-    alert("Copied to clipboard!");
+    toast.success("Copyied To ClipBoard")
   };
 
   return (
