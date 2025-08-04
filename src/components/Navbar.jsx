@@ -115,18 +115,59 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation Menu */}
-      {isMobileNavOpen && (
-        <div className="lg:hidden mt-3 space-y-2 bg-purple-700 p-4 rounded-lg">
-          <Link to="/" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Home</Link>
-          <Link to="/about-us" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">About Us</Link>
-          <Link to="/feedback" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Feedback</Link>
-          <Link to="/hire-me" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Hire Me</Link>
-          <Link to="/analytics" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Analytics</Link>
-          <Link to="/myqrcodes" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">My QRCodes</Link>
-           <Link to="/custom-features" onClick={() => setIsMobileNavOpen(false)} className="block hover:text-gray-300">Custom Features</Link>
-
-        </div>
-      )}
+     {isMobileNavOpen && (
+  <div className="lg:hidden mt-3 space-y-2 bg-purple-700 p-4 rounded-lg">
+    <Link 
+      to="/" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      Home
+    </Link>
+    <Link 
+      to="/about-us" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/about-us' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      About Us
+    </Link>
+    <Link 
+      to="/feedback" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/feedback' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      Feedback
+    </Link>
+    <Link 
+      to="/hire-me" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/hire-me' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      Hire Me
+    </Link>
+    <Link 
+      to="/analytics" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/analytics' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      Analytics
+    </Link>
+    <Link 
+      to="/myqrcodes" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/myqrcodes' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      My QRCodes
+    </Link>
+    <Link 
+      to="/custom-features" 
+      onClick={() => setIsMobileNavOpen(false)} 
+      className={`block hover:text-gray-300 ${location.pathname === '/custom-features' ? 'bg-purple-600 rounded px-2 py-1' : ''}`}
+    >
+      Custom Features
+    </Link>
+  </div>
+)}
     </nav>
   );
 };
