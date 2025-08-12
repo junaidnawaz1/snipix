@@ -16,7 +16,7 @@ const Analytics = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [linkToDelete, setLinkToDelete] = useState(null);
   const navigate = useNavigate();
-  const FRONTEND_URL = "https://snipix-app.vercel.app";
+  const FRONTEND_URL = "https://www.snipix.tech";
 
   useEffect(() => {
     const fetchLinks = async () => {
