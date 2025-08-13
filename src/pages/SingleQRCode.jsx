@@ -2,14 +2,21 @@ import React from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
 const SingleQRCode = ({ link }) => {
-  // Your main frontend domain for short links
-  const frontendBaseUrl = "https://snipix.tech";
+  // Use your new frontend domain
+  const frontendBaseUrl = "https://www.snipix.tech";
+
+  // Prevent crash if link is undefined or missing shortUrl
+  if (!link || !link.shortUrl) {
+    return null; // or return a loading/placeholder UI
+  }
+
+  const shortLinkUrl = `${frontendBaseUrl}/${link.shortUrl}`;
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md flex flex-col items-center">
       {/* QR Code */}
       <QRCodeCanvas
-        value={`${frontendBaseUrl}/${link.shortUrl}`}
+        value={shortLinkUrl}
         size={180}
         bgColor="#ffffff"
         fgColor="#000000"
@@ -18,12 +25,12 @@ const SingleQRCode = ({ link }) => {
 
       {/* Short URL */}
       <a
-        href={`${frontendBaseUrl}/${link.shortUrl}`}
+        href={shortLinkUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="text-purple-600 hover:text-purple-800 underline break-all text-sm mt-2"
       >
-        {`${frontendBaseUrl}/${link.shortUrl}`}
+        {shortLinkUrl}
       </a>
 
       {/* Original URL */}
