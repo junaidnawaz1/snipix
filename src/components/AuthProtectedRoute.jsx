@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../axiosConfig";
-import { useAuth } from "./AuthContext";// Add this import
+import { useAuth } from "./AuthContext";
+import toast from "react-hot-toast"; // Import react-hot-toast
 
 const AuthProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
   const [checking, setChecking] = useState(true);
-  const { setIsLoggedIn } = useAuth(); // Get setter from context
+  const { setIsLoggedIn } = useAuth();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -16,13 +17,18 @@ const AuthProtectedRoute = ({ children }) => {
         setChecking(false);
       } catch (err) {
         setIsLoggedIn(false);
+        toast.error("Please login to access this page"); // Show error toast
         navigate("/login");
       }
     };
     checkAuth();
   }, [navigate, setIsLoggedIn]);
 
-  if (checking) return <div className="text-center p-4">Loading...</div>;
+  if (checking) return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  );
 
   return children;
 };
