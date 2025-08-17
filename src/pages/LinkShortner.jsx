@@ -1,4 +1,3 @@
-// LinkShortner.jsx
 import React, { useState } from "react";
 import axios from '../axiosConfig';
 import { useNavigate } from "react-router-dom";
@@ -29,14 +28,19 @@ const LinkShortner = () => {
         setError("");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Error shortening URL");
+      if (err.response?.data?.message === "Invalid token") {
+        toast.error("Please login or register to shorten URLs");
+        navigate("/login");
+      } else {
+        setError(err.response?.data?.message || "Error shortening URL");
+      }
       console.error("Error:", err);
     }
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shortUrl);
-    toast.success("Copyied To ClipBoard")
+    toast.success("Copied To Clipboard")
   };
 
   return (
